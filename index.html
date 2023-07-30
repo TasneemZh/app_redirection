@@ -2,8 +2,17 @@
 <html>
   <body>
     <script>
+      const url = new URL(window.location.href);
+      const destination = url.searchParams.get('destination');
+      const jumpLink = url.searchParams.get('jumpLink');
+
+
       window.onload = function() {
-        window.location.href = "com.gnc.app://homepage?source=evyd";
+        if (destination === 'digitalRoutines') {
+          window.location.href = `com.gnc.app://push_notification?source=evyd&jumpLink=${encodeURIComponent(jumpLink)}`;
+        } else {
+          window.location.href = "com.gnc.app://homepage?source=evyd";
+        }
 
         setTimeout(function() {
           if (navigator.userAgent.match(/Android/i)) {
