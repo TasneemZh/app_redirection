@@ -4,12 +4,12 @@
     <script>
       const url = new URL(window.location.href);
       const destination = url.searchParams.get('destination');
-      const jumpLink = url.searchParams.get('jumpLink');
+      const jumpLink = url.searchParams.get('jumpLink'); // should be encoded to preserve its query params
 
 
       window.onload = function() {
         if (destination === 'digitalRoutines') {
-          window.location.href = `com.gnc.app://push_notification?source=evyd&jumpLink=${encodeURIComponent(jumpLink)}`;
+          window.location.href = `com.gnc.app://push_notification?source=evyd&jumpLink=${jumpLink}`; // decoded inside the app
         } else {
           window.location.href = "com.gnc.app://homepage?source=evyd";
         }
