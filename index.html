@@ -30,7 +30,7 @@
         if (destination === 'digitalRoutines') {
           logToWebhook({ destinationResult: 'Digital Routines' });
 
-          window.location.href = `com.gnc.app://push_notification?source=evyd&jumpLink=${jumpLink}`; // decoded inside the app
+          window.location.href = `com.gnc.app://push_notification?source=evyd&jumpLink=${encodeURIComponent(jumpLink)}`;
         } else {
           logToWebhook({ destinationResult: 'Homepage' });
 
