@@ -14,17 +14,24 @@
           window.location.href = "com.gnc.app://homepage?source=evyd";
         }
 
-        setTimeout(function() {
-          if (navigator.userAgent.match(/Android/i)) {
+        if (navigator.userAgent.match(/Android/i)) {
+          setTimeout(function() {
             window.location.href = "intent://play.google.com/store/apps/details?id=com.gnc.android.gnc&pcampaignid=web_redirect#Intent;scheme=https;action=android.intent.action.VIEW;package=com.android.vending;S.browser_fallback_url=https://play.google.com/store/apps/details?id=com.gnc.android.gnc&hl=en&gl=US&pli=1&redirect=0;end";
-          } else if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+          }, 1000);
+        } else if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+          setTimeout(function() {
             window.location.href = "https://apps.apple.com/us/app/gnc-livewell/id413258417";
-          } else if (navigator.userAgent.match(/Windows/i)) {
+          }, 5000);
+        } else if (navigator.userAgent.match(/Windows/i)) {
+          setTimeout(function() {
             window.location.href = "https://play.google.com/store/apps/details?id=com.gnc.android.gnc&hl=en&gl=US";
-          } else {
+          }, 1000);
+        } else {
+          setTimeout(function() {
             window.location.href = "https://apps.apple.com/us/app/gnc-livewell/id413258417";
-          }
-        }, 1000);
+          }, 5000);
+        }
+
       }
     </script>
   </body>
