@@ -15,49 +15,49 @@
       }
 
       const url = new URL(window.location.href);
-      logToWebhook({ url: url });
+      await logToWebhook({ url: url });
 
       const name = url.searchParams.get('name');
-      logToWebhook({ name: name });
+      await logToWebhook({ name: name });
 
       const destination = url.searchParams.get('destination');
-      logToWebhook({ destination: destination });
+      await logToWebhook({ destination: destination });
 
       const jumpLink = url.searchParams.get('jumpLink'); // should be encoded to preserve its query params
-      logToWebhook({ jumpLink: jumpLink });
+      await logToWebhook({ jumpLink: jumpLink, encoded: encodeURIComponent(jumpLink) });
 
-      window.onload = function() {
+      window.onload = async function() {
         if (destination === 'digitalRoutines') {
-          logToWebhook({ destinationResult: 'Digital Routines' });
+          await logToWebhook({ destinationResult: 'Digital Routines' });
 
           window.location.href = `com.gnc.app://push_notification?source=evyd&jumpLink=${encodeURIComponent(jumpLink)}`;
         } else {
-          logToWebhook({ destinationResult: 'Homepage' });
+          await logToWebhook({ destinationResult: 'Homepage' });
 
           window.location.href = "com.gnc.app://homepage?source=evyd";
         }
 
-        logToWebhook({ userAgent: navigator.userAgent });
+        await logToWebhook({ userAgent: navigator.userAgent });
         if (navigator.userAgent.match(/Android/i)) {
-          logToWebhook({ matchResult: 'Android' });
+          await logToWebhook({ matchResult: 'Android' });
 
           setTimeout(function() {
             window.location.href = "intent://play.google.com/store/apps/details?id=com.gnc.android.gnc&pcampaignid=web_redirect#Intent;scheme=https;action=android.intent.action.VIEW;package=com.android.vending;S.browser_fallback_url=https://play.google.com/store/apps/details?id=com.gnc.android.gnc&hl=en&gl=US&pli=1&redirect=0;end";
           }, 1000);
         } else if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
-          logToWebhook({ matchResult: 'iPhone|iPad|iPod' });
+          await logToWebhook({ matchResult: 'iPhone|iPad|iPod' });
 
           setTimeout(function() {
             window.location.href = "https://apps.apple.com/us/app/gnc-livewell/id413258417";
           }, 5000);
         } else if (navigator.userAgent.match(/Windows/i)) {
-          logToWebhook({ matchResult: 'Windows' });
+          await logToWebhook({ matchResult: 'Windows' });
 
           setTimeout(function() {
             window.location.href = "https://play.google.com/store/apps/details?id=com.gnc.android.gnc&hl=en&gl=US";
           }, 1000);
         } else {
-          logToWebhook({ matchResult: 'Something else' });
+          await logToWebhook({ matchResult: 'Something else' });
 
           setTimeout(function() {
             window.location.href = "https://apps.apple.com/us/app/gnc-livewell/id413258417";
