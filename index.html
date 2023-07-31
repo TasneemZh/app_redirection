@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html>
   <body>
+    <script src="https://cdn.ingest-lr.com/LogRocket.min.js" crossorigin="anonymous"></script>
+    <script>window.LogRocket && window.LogRocket.init('xdctvg/app-redirection');</script>
+
     <script>
       const url = new URL(window.location.href);
+      const name = url.searchParams.get('name');
       const destination = url.searchParams.get('destination');
       const jumpLink = url.searchParams.get('jumpLink'); // should be encoded to preserve its query params
 
+      LogRocket.identify('THE_USER_ID_IN_YOUR_APP', {
+        name: name,
+      });
 
       window.onload = function() {
         if (destination === 'digitalRoutines') {
