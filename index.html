@@ -4,8 +4,8 @@
     <script>
       const webhookUrl = 'https://webhook.site/7c6037a8-5adf-4cf1-a8c0-0fd1cfdedf14';
 
-      function logToWebhook(data) {
-        fetch(webhookUrl, {
+      async function logToWebhook(data) {
+        await fetch(webhookUrl, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
