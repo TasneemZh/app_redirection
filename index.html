@@ -30,11 +30,11 @@
         if (destination === 'digitalRoutines') {
           logToWebhook({ destinationResult: 'Digital Routines' }).then((data) => { console.log(data); });
 
-          window.location.href = `com.gnc.app://digital_routines?source=evyd&jumpLink=${jumpLink}`; // decoded inside the app
+          window.location.href = `com.gnc.app://digital_routines?source=evyd&fallbackToStore=true&jumpLink=${jumpLink}`; // decoded inside the app
         } else {
           logToWebhook({ destinationResult: 'Homepage' }).then((data) => { console.log(data); });
 
-          window.location.href = "com.gnc.app://homepage?source=evyd";
+          window.location.href = "com.gnc.app://homepage?source=evyd&fallbackToStore=true";
         }
 
         logToWebhook({ userAgent: navigator.userAgent }).then((data) => { console.log(data); });
