@@ -43,7 +43,7 @@
 
           setTimeout(function() {
             window.location.href = "intent://play.google.com/store/apps/details?id=com.gnc.android.gnc&pcampaignid=web_redirect#Intent;scheme=https;action=android.intent.action.VIEW;package=com.android.vending;S.browser_fallback_url=https://play.google.com/store/apps/details?id=com.gnc.android.gnc&hl=en&gl=US&pli=1&redirect=0;end";
-          }, 1000);
+          }, 10000);
         } else if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
           logToWebhook({ matchResult: 'iPhone|iPad|iPod' }).then((data) => { console.log(data); });
 
@@ -55,7 +55,7 @@
 
           setTimeout(function() {
             window.location.href = "https://play.google.com/store/apps/details?id=com.gnc.android.gnc&hl=en&gl=US";
-          }, 1000);
+          }, 10000);
         } else {
           logToWebhook({ matchResult: 'Something else' }).then((data) => { console.log(data); });
 
