@@ -14,28 +14,16 @@
         });
       }
 
-      const url = new URL(window.location.href);
-      logToWebhook({ url: url }).then((data) => { console.log(data); });
+  const url = new URL(window.location.href);
 
-      const name = url.searchParams.get('name');
-      logToWebhook({ name: name }).then((data) => { console.log(data); });
+  const destination = url.searchParams.get('destination'); // should be encoded to preserve its query params
 
-      const destination = url.searchParams.get('destination');
-      logToWebhook({ destination: destination }).then((data) => { console.log(data); });
+  window.onload = function() {
+  
+  window.location.href = decodeURIComponent(destination); // decode before redirecting to the deep linking URL
 
-      const jumpLink = url.searchParams.get('jumpLink'); // should be encoded to preserve its query params
-      logToWebhook({ jumpLink: jumpLink }).then((data) => { console.log(data); });
-
-      window.onload = function() {
-        if (destination === 'digitalRoutines') {
-          logToWebhook({ destinationResult: 'Digital Routines' }).then((data) => { console.log(data); });
-
-          window.location.href = `com.gnc.app://digital_routines?source=evyd&fallbackToStore=true&jumpLink=${jumpLink}`; // decoded inside the app
-        } else {
-          logToWebhook({ destinationResult: 'Homepage' }).then((data) => { console.log(data); });
-
-          window.location.href = "com.gnc.app://homepage?source=evyd&fallbackToStore=true";
-        }
+  // fallback piece to execute if the above failed to get the user outside the server by redirection
+  if (navigator.userAgent.match(/Android/i)) {
 
         logToWebhook({ userAgent: navigator.userAgent }).then((data) => { console.log(data); });
         if (navigator.userAgent.match(/Android/i)) {
