@@ -18,14 +18,13 @@
 
   const destination = url.searchParams.get('destination'); // should be encoded to preserve its query params
 
+  const appUri = decodeURIComponent(destination); // decode before redirecting to the deep linking URL
+
   window.onload = function() {
   
-  window.location.href = decodeURIComponent(destination); // decode before redirecting to the deep linking URL
-
-  // fallback piece to execute if the above failed to get the user outside the server by redirection
-  if (navigator.userAgent.match(/Android/i)) {
-
-        logToWebhook({ userAgent: navigator.userAgent }).then((data) => { console.log(data); });
+        window.location.href = appUri;
+  
+        // fallback piece to execute if the above failed to get the user outside the server by redirection
         if (navigator.userAgent.match(/Android/i)) {
           logToWebhook({ matchResult: 'Android' }).then((data) => { console.log(data); });
 
